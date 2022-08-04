@@ -95,7 +95,8 @@ spec:
             - name: CASSANDRA_HOST
               value: {{ first (splitList "," (include "temporal.persistence.cassandra.hosts" (list $ $store))) }}
             - name: CASSANDRA_PORT
-              value: {{ include "temporal.persistence.cassandra.port" (list $ $store) | quote }}
+              value: "9042"
+{{/*              value: {{ include "temporal.persistence.cassandra.port" (list $ $store) | quote }}*/}}
             - name: CASSANDRA_KEYSPACE
               value: {{ $storeConfig.cassandra.keyspace }}
             {{- if $storeConfig.cassandra.user }}

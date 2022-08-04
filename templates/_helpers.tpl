@@ -171,18 +171,18 @@ Source: https://stackoverflow.com/a/52024583/3027614
 {{- end -}}
 {{- end -}}
 
-{{- define "temporal.persistence.cassandra.port" -}}
-{{- $global := index . 0 -}}
-{{- $store := index . 1 -}}
-{{- $storeConfig := index $global.Values.server.config.persistence $store -}}
-{{- if $storeConfig.cassandra.port -}}
-{{- $storeConfig.cassandra.port -}}
-{{- else if and $global.Values.cassandra.enabled (eq (include "temporal.persistence.driver" (list $global $store)) "cassandra") -}}
-{{- $global.Values.cassandra.config.ports.cql -}}
-{{- else -}}
-{{- required (printf "Please specify cassandra port for %s store" $store) $storeConfig.cassandra.port -}}
-{{- end -}}
-{{- end -}}
+{{/*{{- define "temporal.persistence.cassandra.port" -}}*/}}
+{{/*{{- $global := index . 0 -}}*/}}
+{{/*{{- $store := index . 1 -}}*/}}
+{{/*{{- $storeConfig := index $global.Values.server.config.persistence $store -}}*/}}
+{{/*{{- if $storeConfig.cassandra.port -}}*/}}
+{{/*{{- $storeConfig.cassandra.port -}}*/}}
+{{/*{{- else if and $global.Values.cassandra.enabled (eq (include "temporal.persistence.driver" (list $global $store)) "cassandra") -}}*/}}
+{{/*{{- $global.Values.cassandra.config.ports.cql -}}*/}}
+{{/*{{- else -}}*/}}
+{{/*{{- required (printf "Please specify cassandra port for %s store" $store) $storeConfig.cassandra.port -}}*/}}
+{{/*{{- end -}}*/}}
+{{/*{{- end -}}*/}}
 
 {{- define "temporal.persistence.cassandra.secretName" -}}
 {{- $global := index . 0 -}}

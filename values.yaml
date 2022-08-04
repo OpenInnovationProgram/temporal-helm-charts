@@ -334,6 +334,7 @@ elasticsearch:
   username: ""
   password: ""
   visibilityIndex: "temporal_visibility_v1_dev"
+  external: false
 
 prometheus:
   enabled: true
@@ -417,4 +418,6 @@ cassandra:
     type: ClusterIP
 
 mysql:
+  enabled: false
+postgresql:
   enabled: false

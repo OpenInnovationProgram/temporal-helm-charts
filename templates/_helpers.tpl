@@ -311,7 +311,7 @@ Source: https://stackoverflow.com/a/52024583/3027614
 {{- $store := index . 1 -}}
 {{- $storeConfig := index $global.Values.server.config.persistence $store -}}
 {{- if or $storeConfig.sql.existingSecret $storeConfig.sql.password -}}
-{{- print "password" -}}
+{{- print $storeConfig.sql.secretKey -}}
 {{- else if and $global.Values.mysql.enabled (and (eq (include "temporal.persistence.driver" (list $global $store)) "sql") (eq (include "temporal.persistence.sql.driver" (list $global $store)) "mysql")) -}}
 {{- print "mysql-password" -}}
 {{- else if and $global.Values.postgresql.enabled (and (eq (include "temporal.persistence.driver" (list $global $store)) "sql") (eq (include "temporal.persistence.sql.driver" (list $global $store)) "postgres")) -}}

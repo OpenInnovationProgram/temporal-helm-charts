@@ -100,7 +100,9 @@ data:
       membership:
         name: temporal
         maxJoinDuration: 30s
-        broadcastAddress: {{ `{{ default .Env.POD_IP "0.0.0.0" }}` }}
+        #https://github.com/temporalio/temporal/issues/2630
+        #https://docs.temporal.io/references/configuration#broadcastaddress
+        broadcastAddress: "0.0.0.0"
 
       pprof:
         port: 7936

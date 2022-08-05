@@ -104,6 +104,8 @@ spec:
               value: "{{ include "temporal.persistence.sql.user" (list $ "default") }}"
             - name: SQL_PORT
               value: "{{ include "temporal.persistence.sql.port" (list $ "default") }}"
+            - name: SQL_HOST
+              value: "{{ include "temporal.persistence.sql.host" (list $ "default") }}"
             {{- if eq (include "temporal.persistence.driver" (list $ $store)) "cassandra" }}
             - name: CASSANDRA_HOST
               value: {{ first (splitList "," (include "temporal.persistence.cassandra.hosts" (list $ $store))) }}

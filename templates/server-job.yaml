@@ -91,6 +91,19 @@ spec:
           imagePullPolicy: {{ $.Values.admintools.image.pullPolicy }}
           command: ["temporal-{{ include "temporal.persistence.driver" (list $ $store) }}-tool", "setup-schema", "-v", "0.0"]
           env:
+            - name: SQL_PLUGIN
+              value: {{ include "temporal.persistence.sql.driver" (list $ "default") }}
+            - name: SQL_DATABASE
+              value: {{ $.Values.server.config.persistence.default.sql.database }}
+            - name: SQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "temporal.persistence.secretName" (list $ "default") }}
+                  key: {{ include "temporal.persistence.secretKey" (list $ "default") }}
+            - name: SQL_USER
+              value: {{ include "temporal.persistence.sql.user" (list $ "default") }}
+            - name: SQL_PORT
+              value: {{ include "temporal.persistence.sql.port" (list $ "default") }}
             {{- if eq (include "temporal.persistence.driver" (list $ $store)) "cassandra" }}
             - name: CASSANDRA_HOST
               value: {{ first (splitList "," (include "temporal.persistence.cassandra.hosts" (list $ $store))) }}
